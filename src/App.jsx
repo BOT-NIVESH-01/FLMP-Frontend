@@ -176,12 +176,13 @@ const App = () => {
               leaves={leaves}
               timetable={timetable}
               onLogout={handleLogout}
-              onRequestLeave={handleRequestLeave}
-              onApproveLeave={handleApproveLeave}
-              onAcceptSubRequest={handleAcceptSubRequest}
-              onForceAssign={handleForceAssign}
-              addToast={addToast}
-            />
+            onRequestLeave={handleRequestLeave}
+            onApproveLeave={handleApproveLeave}
+            onAcceptSubRequest={handleAcceptSubRequest}
+            onForceAssign={handleForceAssign}
+            addToast={addToast}
+            refreshData={fetchDashboardData}
+          />
         )
       ) : (
         <Login onLogin={handleLoginSuccess} addToast={addToast} />
