@@ -172,27 +172,27 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm font-sans">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm font-sans">
       <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-[slideIn_0.2s_ease-out]">
         
-        <div className="bg-blue-600 px-6 py-5 flex justify-between items-center text-white shrink-0">
+        <div className="bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] px-6 py-5 flex justify-between items-center text-white shrink-0">
           <div>
              <h3 className="text-xl font-bold">Apply for Leave</h3>
-             <p className="text-blue-200 text-xs font-medium mt-1">Step {step} of {((formData.type === 'Partial' || formData.type === 'Casual') && classesReqSubstitution.length === 0) ? '1' : '2'}</p>
+             <p className="text-white/80 text-xs font-medium mt-1">Step {step} of {((formData.type === 'Partial' || formData.type === 'Casual') && classesReqSubstitution.length === 0) ? '1' : '2'}</p>
           </div>
           <button onClick={onClose} className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors">
             <X size={20} />
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto flex-1 bg-slate-50/50">
+        <div className="p-6 overflow-y-auto flex-1 bg-white">
           {step === 1 ? (
             <div className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Leave Type</label>
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Leave Type</label>
                   <select
-                    className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+                    className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] bg-white shadow-soft"
                     value={formData.type}
                     onChange={e => setFormData({ ...formData, type: e.target.value })}
                   >
@@ -202,10 +202,10 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
                   </select>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Start Date</label>
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Start Date</label>
                   <input
                     type="date"
-                    className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+                    className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] bg-white shadow-soft"
                     value={formData.date}
                     onChange={e => setFormData({ ...formData, date: e.target.value })}
                   />
@@ -214,10 +214,10 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
 
               {formData.type === 'Medical' && (
                 <div className="flex flex-col gap-1.5 animate-[slideIn_0.2s_ease-out]">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">End Date <span className="text-slate-400 font-normal">(Min 10 days)</span></label>
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">End Date <span className="text-[#666666] font-normal">(Min 10 days)</span></label>
                   <input
                     type="date"
-                    className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm"
+                    className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] focus:outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] bg-white shadow-soft"
                     value={formData.endDate}
                     onChange={e => setFormData({ ...formData, endDate: e.target.value })}
                   />
@@ -242,9 +242,9 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
               )}
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-sm font-semibold text-slate-700 pl-1">Reason</label>
+                <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Reason</label>
                 <textarea
-                  className="border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm min-h-[100px] resize-y"
+                  className="border border-[#E0E0E0] rounded-xl px-4 py-3 text-sm text-[#1A1A1A] placeholder:text-[#999999] focus:outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] bg-white shadow-soft min-h-[100px] resize-y"
                   placeholder="Please provide a brief reason..."
                   value={formData.reason}
                   onChange={e => setFormData({ ...formData, reason: e.target.value })}
@@ -252,7 +252,7 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
               </div>
 
               {formData.type === 'Partial' && formData.date && formData.startTime && formData.endTime && (
-                 <div className={`p-4 rounded-xl border ${classesReqSubstitution.length > 0 ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-emerald-50 border-emerald-200 text-emerald-800'} flex items-start gap-3`}>
+                 <div className={`p-4 rounded-xl border ${classesReqSubstitution.length > 0 ? 'bg-[#FFF1E6] border-[#F7E4D1] text-[#CC4A21]' : 'bg-[#F0FDF4] border-[#D5F4CF] text-[#228B22]'} flex items-start gap-3`}>
                     {classesReqSubstitution.length > 0 ? <AlertCircle size={20} className="shrink-0 mt-0.5" /> : <CheckCircle size={20} className="shrink-0 mt-0.5" />}
                     <span className="text-sm font-medium">
                       {classesReqSubstitution.length > 0 
@@ -264,10 +264,10 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
               )}
 
               {classesReqSubstitution.length > 0 && formData.type !== 'Partial' && (
-                <div className="bg-white border border-slate-200 p-5 rounded-xl shadow-sm">
-                  <h4 className="text-sm font-bold text-slate-800 mb-2">Impacted Classes:</h4>
-                  <p className="text-sm text-slate-600 flex items-center gap-2">
-                    <BookOpen size={16} className="text-blue-500" />
+                <div className="bg-white border border-[#E0E0E0] p-5 rounded-xl shadow-soft">
+                  <h4 className="text-sm font-bold text-[#0A4D9C] mb-2">Impacted Classes:</h4>
+                  <p className="text-sm text-[#475569] flex items-center gap-2">
+                    <BookOpen size={16} className="text-[#0A4D9C]" />
                     <strong>{classesReqSubstitution.length}</strong> slots require substitution.
                   </p>
                 </div>
@@ -275,21 +275,21 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
             </div>
           ) : (
             <div className="flex flex-col gap-5">
-              <div className="bg-blue-50 border border-blue-200 p-5 rounded-xl flex flex-col gap-2">
-                <h4 className="font-bold text-blue-900 flex items-center gap-2">
+              <div className="bg-[#F4F7FB] border border-[#D0E2F7] p-5 rounded-xl flex flex-col gap-2">
+                <h4 className="font-bold text-[#0A4D9C] flex items-center gap-2">
                    <Shield size={18} /> Smart Substitution Engine
                 </h4>
                 {classesReqSubstitution.length === 0 ? (
-                    <p className="text-emerald-700 text-sm font-medium">
+                    <p className="text-[#228B22] text-sm font-medium">
                       No classes overlap with your leave. No substitutes required.
                     </p>
                 ) : (
-                    <p className="text-blue-800 text-sm">
+                    <p className="text-[#1E73BE] text-sm">
                       Requests will be automatically broadcast to <b>all available faculty</b> for each slot. First to accept will be assigned.
                     </p>
                 )}
                 {formData.type === 'Medical' && (
-                  <p className="text-amber-700 text-xs font-bold bg-amber-100/50 p-2 rounded mt-1 border border-amber-200">
+                  <p className="text-[#CC4A21] text-xs font-bold bg-[#FFF4F0] p-2 rounded mt-1 border border-[#FDD7C8]">
                     * Medical Leave: You may submit even if no faculty is currently available.
                   </p>
                 )}
@@ -298,28 +298,28 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
               {classesReqSubstitution.length > 0 && (
                 <div className="flex flex-col gap-3">
                   {groupedSubs.map((group, idx) => (
-                    <div key={idx} className="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden">
-                      <div className="flex justify-between items-center p-4 bg-slate-50 border-b border-slate-100">
+                    <div key={idx} className="border border-[#E0E0E0] rounded-xl bg-white shadow-soft overflow-hidden">
+                      <div className="flex justify-between items-center p-4 bg-[#F4F7FB] border-b border-[#E0E0E0]">
                           <div>
-                            <div className="font-bold text-sm text-slate-800">{group.date} • Slot {group.slot}</div>
-                            <div className="text-xs text-slate-500 font-medium mt-0.5">{group.subject} ({group.class})</div>
+                            <div className="font-bold text-sm text-[#0A4D9C]">{group.date} • Slot {group.slot}</div>
+                            <div className="text-xs text-[#666666] font-medium mt-0.5">{group.subject} ({group.class})</div>
                           </div>
-                          <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full border border-blue-200">
+                          <span className="bg-[#F4F7FB] text-[#0A4D9C] text-xs font-bold px-2.5 py-1 rounded-full border border-[#D0E2F7]">
                             {group.candidates.length} Candidate(s)
                           </span>
                       </div>
                       
                       <div className="p-4 bg-white">
-                        <strong className="text-xs text-slate-500 uppercase tracking-wider mb-2 block">Auto-selected Broadcastees:</strong>
+                        <strong className="text-xs text-[#666666] uppercase tracking-wider mb-2 block">Auto-selected Broadcastees:</strong>
                         <div className="flex flex-wrap gap-2">
                           {group.candidates.map((sub, i) => (
-                            <span key={i} className="bg-slate-100 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-200">
+                            <span key={i} className="bg-[#F4F7FB] text-[#0A4D9C] text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#D0E2F7]">
                                {sub.subName}
                             </span>
                           ))}
                         </div>
                         {group.candidates[0].subId === null && (
-                           <span className="text-rose-600 text-sm font-medium flex items-center gap-1.5 bg-rose-50 p-2 rounded-lg border border-rose-100 mt-2">
+                           <span className="text-[#CD5C5C] text-sm font-medium flex items-center gap-1.5 bg-[#FFF4F0] p-2 rounded-lg border border-[#FDD7C8] mt-2">
                               <AlertCircle size={14} /> No faculty available for this slot.
                            </span>
                         )}
@@ -332,15 +332,15 @@ export const LeaveApplicationForm = ({ user, allUsers, onClose, onSubmit, addToa
           )}
         </div>
 
-        <div className="bg-slate-50 p-5 border-t border-slate-200 flex justify-between shrink-0">
+        <div className="bg-[#F4F7FB] p-5 border-t border-[#E0E0E0] flex justify-between shrink-0">
           {step === 2 && (
-            <button onClick={() => setStep(1)} className="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-xl font-semibold hover:bg-slate-50 transition-colors shadow-sm">
+            <button onClick={() => setStep(1)} className="px-5 py-2.5 bg-white border border-[#E0E0E0] text-slate-700 rounded-xl font-semibold hover:bg-[#F4F7FB] transition-colors shadow-sm">
               Back
             </button>
           )}
           <button 
             onClick={handleNext} 
-            className="ml-auto px-6 py-2.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-md shadow-blue-600/20 flex items-center gap-2"
+            className="ml-auto px-6 py-2.5 bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] text-white rounded-xl font-bold hover:from-[#0A3A7A] hover:to-[#1A5FA0] transition-colors shadow-md shadow-[#0A4D9C]/20 flex items-center gap-2"
           >
             {step === 1 && !((formData.type === 'Partial' || formData.type === 'Casual') && classesReqSubstitution.length === 0) ? (
               <>Next Step <ChevronRight size={18} /></>

@@ -2,21 +2,21 @@ import React from 'react';
 import { Clock, CheckCircle, XCircle } from 'lucide-react';
 
 export const StatusBadge = ({ status }) => {
-  let badgeClass = 'bg-amber-100 text-amber-800 border-amber-200';
+  let badgeClass = 'bg-[#FDB752]/20 text-[#CC8B1D] border-[#FDB752]/50';
   let Icon = Clock;
 
-  if (status === 'Accepted' || status === 'Approved') { 
-    badgeClass = 'bg-emerald-100 text-emerald-800 border-emerald-200'; 
-    Icon = CheckCircle; 
+  if (status === 'Accepted' || status === 'Approved') {
+    badgeClass = 'bg-[#228B22]/20 text-[#228B22] border-[#228B22]/50';
+    Icon = CheckCircle;
   }
-  else if (status === 'Rejected') { 
-    badgeClass = 'bg-rose-100 text-rose-800 border-rose-200'; 
-    Icon = XCircle; 
+  else if (status === 'Rejected') {
+    badgeClass = 'bg-[#CD5C5C]/20 text-[#A0413F] border-[#CD5C5C]/50';
+    Icon = XCircle;
   }
 
   return (
-    <span className={`px-2.5 py-1 rounded-full text-[0.7rem] font-bold tracking-wide uppercase flex items-center gap-1.5 border w-fit ${badgeClass}`}>
-      <Icon size={12} strokeWidth={2.5} />
+    <span className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase flex items-center gap-1.5 border w-fit ${badgeClass} backdrop-blur-sm`}>
+      <Icon size={14} strokeWidth={2.5} />
       {status}
     </span>
   );

@@ -7,12 +7,13 @@ import { API_URL } from './config';
 import { Login } from './components/auth/Login';
 import { Dashboard } from './components/dashboard/Dashboard';
 import { ToastContainer } from './components/common/ToastContainer';
+import { ThemeProvider } from './context/ThemeContext';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [users, setUsers] = useState([]); 
-  const [leaves, setLeaves] = useState([]); 
-  const [timetable, setTimetable] = useState([]); 
+  const [users, setUsers] = useState([]);
+  const [leaves, setLeaves] = useState([]);
+  const [timetable, setTimetable] = useState([]);
   const [toasts, setToasts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,10 +22,10 @@ const App = () => {
     if (!token) return;
 
     if (showLoader) setIsLoading(true);
-    
+
     try {
       const config = { headers: { 'x-auth-token': token } };
-      
+
       const [leavesRes, timetableRes, usersRes] = await Promise.all([
         axios.get(`${API_URL}/data/leaves`, config),
         axios.get(`${API_URL}/data/timetable`, config),
@@ -41,11 +42,11 @@ const App = () => {
         setCurrentUser(null);
       }
       if (err.response && err.response.status === 404) {
-         localStorage.removeItem('token');
-         setCurrentUser(null);
+        localStorage.removeItem('token');
+        setCurrentUser(null);
       }
     } finally {
-        if (showLoader) setIsLoading(false);
+      if (showLoader) setIsLoading(false);
     }
   }, []);
 
@@ -88,10 +89,10 @@ const App = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { 'x-auth-token': token } };
-      
+
       await axios.post(`${API_URL}/data/leaves`, formData, config);
-      
-      await fetchDashboardData(); 
+
+      await fetchDashboardData();
       addToast("Leave request submitted successfully.", "success");
     } catch (err) {
       const errorMsg = err.response?.data?.msg || "Failed to submit leave request.";
@@ -103,9 +104,9 @@ const App = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { 'x-auth-token': token } };
-      
-      await axios.patch(`${API_URL}/data/leaves/${leaveId}/substitute`, 
-        { slot, status: isAccepted ? 'Accepted' : 'Rejected' }, 
+
+      await axios.patch(`${API_URL}/data/leaves/${leaveId}/substitute`,
+        { slot, status: isAccepted ? 'Accepted' : 'Rejected' },
         config
       );
 
@@ -121,8 +122,8 @@ const App = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { 'x-auth-token': token } };
 
-      await axios.patch(`${API_URL}/data/leaves/${leaveId}/force-substitute`, 
-        { slot, subId, subName }, 
+      await axios.patch(`${API_URL}/data/leaves/${leaveId}/force-substitute`,
+        { slot, subId, subName },
         config
       );
 
@@ -139,7 +140,7 @@ const App = () => {
       const config = { headers: { 'x-auth-token': token } };
 
       await axios.patch(`${API_URL}/data/leaves/${leaveId}/status`, { status }, config);
-      
+
       await fetchDashboardData(false);
       addToast(`Leave request ${status.toLowerCase()}.`, status === 'Approved' ? "success" : "info");
     } catch (err) {
@@ -155,27 +156,27 @@ const App = () => {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <ToastContainer toasts={toasts} removeToast={removeToast} />
-      
+
       {currentUser ? (
         isLoading ? (
-            <div className="flex items-center justify-center h-screen w-screen bg-slate-50 font-sans">
-               <div className="text-center bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
-                  <div className="mb-4 text-blue-600 flex justify-center">
-                      <Loader size={48} className="animate-spin" />
-                  </div>
-                  <p className="text-slate-600 font-bold text-lg">Initializing Dashboard...</p>
-                  <p className="text-slate-400 text-sm mt-1">Crunching timetable data</p>
-               </div>
+          <div className="flex items-center justify-center h-screen w-screen bg-gradient-to-br from-[#F4F7FB] via-white to-[#F4F7FB] font-sans">
+            <div className="text-center glass-card shadow-soft p-10 rounded-3xl">
+              <div className="mb-4 text-[#0A4D9C] flex justify-center">
+                <Loader size={48} className="animate-spin" />
+              </div>
+              <p className="text-[#1A1A1A] font-bold text-lg">Initializing Dashboard...</p>
+              <p className="text-[#666666] text-sm mt-1">Loading your data</p>
             </div>
+          </div>
         ) : (
-            <Dashboard
-              user={currentUser}
-              allUsers={users}
-              leaves={leaves}
-              timetable={timetable}
-              onLogout={handleLogout}
+          <Dashboard
+            user={currentUser}
+            allUsers={users}
+            leaves={leaves}
+            timetable={timetable}
+            onLogout={handleLogout}
             onRequestLeave={handleRequestLeave}
             onApproveLeave={handleApproveLeave}
             onAcceptSubRequest={handleAcceptSubRequest}
@@ -187,7 +188,7 @@ const App = () => {
       ) : (
         <Login onLogin={handleLoginSuccess} addToast={addToast} />
       )}
-    </>
+    </ThemeProvider>
   );
 };
 

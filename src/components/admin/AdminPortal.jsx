@@ -116,27 +116,27 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
   const selectedUserTimetable = timetable.filter(t => t.userId === selectedUserId);
 
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden mb-auto">
-      <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between">
+    <div className="bg-white border border-[#E0E0E0] rounded-3xl shadow-soft overflow-hidden mb-auto">
+      <div className="p-6 border-b border-[#E0E0E0] bg-gradient-to-r from-[#F4F7FB] to-white flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-            <Shield size={24} className="text-emerald-600" />
+          <h2 className="text-xl font-bold text-[#0A4D9C] flex items-center gap-2">
+            <Shield size={24} className="text-[#228B22]" />
             System Administration
           </h2>
-          <p className="text-sm text-slate-500 mt-1">Manage accounts and platform configurations</p>
+          <p className="text-sm text-[#666666] mt-1">Manage accounts and platform configurations</p>
         </div>
       </div>
 
-      <div className="flex px-6 border-b border-slate-200 bg-slate-50/50">
-        <button 
-          onClick={() => setActiveTab('create')} 
-          className={`py-3 px-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'create' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+      <div className="flex px-6 border-b border-[#E0E0E0] bg-white">
+        <button
+          onClick={() => setActiveTab('create')}
+          className={`py-3 px-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'create' ? 'border-[#0A4D9C] text-[#0A4D9C]' : 'border-transparent text-[#999999] hover:text-[#666666]'}`}
         >
           <div className="flex items-center gap-2"><UserPlus size={16}/> Create Account</div>
         </button>
-        <button 
-          onClick={() => setActiveTab('manage')} 
-          className={`py-3 px-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'manage' ? 'border-emerald-600 text-emerald-700' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+        <button
+          onClick={() => setActiveTab('manage')}
+          className={`py-3 px-4 font-bold text-sm border-b-2 transition-colors ${activeTab === 'manage' ? 'border-[#0A4D9C] text-[#0A4D9C]' : 'border-transparent text-[#999999] hover:text-[#666666]'}`}
         >
           <div className="flex items-center gap-2"><Edit size={16}/> Manage Faculty</div>
         </button>
@@ -146,29 +146,29 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
         {activeTab === 'create' ? (
           <form onSubmit={handleCreateSubmit} className="flex flex-col gap-8 animate-[slideIn_0.2s_ease-out]">
             <div>
-              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2 border-b border-slate-100 pb-2">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-[#0A4D9C] mb-4 flex items-center gap-2 border-b border-[#E0E0E0] pb-2">
                 1. Account Details
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Full Name</label>
-                  <input type="text" name="name" value={userDetails.name} onChange={handleUserChange} placeholder="e.g., Dr. Alan Turing" className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" required />
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Full Name</label>
+                  <input type="text" name="name" value={userDetails.name} onChange={handleUserChange} placeholder="e.g., Dr. Alan Turing" className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#999999] focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] outline-none shadow-soft" required />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Email Address</label>
-                  <input type="email" name="email" value={userDetails.email} onChange={handleUserChange} placeholder="alan@uni.edu" className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" required />
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Email Address</label>
+                  <input type="email" name="email" value={userDetails.email} onChange={handleUserChange} placeholder="alan@uni.edu" className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#999999] focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] outline-none shadow-soft" required />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Password</label>
-                  <input type="text" name="password" value={userDetails.password} onChange={handleUserChange} placeholder="Temporary password" className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" required />
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Password</label>
+                  <input type="text" name="password" value={userDetails.password} onChange={handleUserChange} placeholder="Temporary password" className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#999999] focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] outline-none shadow-soft" required />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Department</label>
-                  <input type="text" name="department" value={userDetails.department} onChange={handleUserChange} placeholder="e.g., Computer Science" className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" required />
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Department</label>
+                  <input type="text" name="department" value={userDetails.department} onChange={handleUserChange} placeholder="e.g., Computer Science" className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#999999] focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] outline-none shadow-soft" required />
                 </div>
                 <div className="flex flex-col gap-1.5 md:col-span-2">
-                  <label className="text-sm font-semibold text-slate-700 pl-1">Role</label>
-                  <select name="role" value={userDetails.role} onChange={handleUserChange} className="border border-slate-300 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white">
+                  <label className="text-sm font-semibold text-[#0A4D9C] pl-1">Role</label>
+                  <select name="role" value={userDetails.role} onChange={handleUserChange} className="border border-[#E0E0E0] rounded-xl px-4 py-2.5 text-sm text-[#1A1A1A] focus:ring-2 focus:ring-[#0A4D9C]/30 focus:border-[#0A4D9C] outline-none bg-white shadow-soft">
                     <option value="Faculty">Faculty</option>
                     <option value="HOD">Head of Department (HOD)</option>
                   </select>
@@ -177,56 +177,56 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-2">
-                 <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
+              <div className="flex items-center justify-between mb-4 border-b border-[#E0E0E0] pb-2">
+                 <h3 className="text-sm font-bold uppercase tracking-widest text-[#0A4D9C] flex items-center gap-2">
                    2. Timetable Setup (Initial)
                  </h3>
-                 <button type="button" onClick={addTimetableEntry} className="text-emerald-600 text-sm font-bold flex items-center gap-1 hover:text-emerald-800 transition-colors">
+                 <button type="button" onClick={addTimetableEntry} className="text-[#0A4D9C] text-sm font-bold flex items-center gap-1 hover:text-[#1E73BE] transition-colors">
                    <Plus size={16} /> Add Slot
                  </button>
               </div>
-              
+
               <div className="flex flex-col gap-3">
                 {timetableEntries.map((entry, index) => (
-                  <div key={index} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr_1fr_auto] gap-3 items-center bg-slate-50 p-3 rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+                  <div key={index} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr_1fr_auto] gap-3 items-center bg-white p-3 rounded-xl border border-[#E0E0E0] shadow-soft transition-all hover:shadow-md">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[0.65rem] font-bold text-slate-500 uppercase ml-1">Day</label>
-                      <select value={entry.day} onChange={(e) => handleTimetableChange(index, 'day', e.target.value)} className="border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500">
+                      <label className="text-[0.65rem] font-bold text-[#666666] uppercase ml-1">Day</label>
+                      <select value={entry.day} onChange={(e) => handleTimetableChange(index, 'day', e.target.value)} className="border border-[#E0E0E0] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft">
                         {days.map(d => <option key={d} value={d}>{d}</option>)}
                       </select>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[0.65rem] font-bold text-slate-500 uppercase ml-1">Slot</label>
-                      <select value={entry.slot} onChange={(e) => handleTimetableChange(index, 'slot', Number(e.target.value))} className="border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500">
+                      <label className="text-[0.65rem] font-bold text-[#666666] uppercase ml-1">Slot</label>
+                      <select value={entry.slot} onChange={(e) => handleTimetableChange(index, 'slot', Number(e.target.value))} className="border border-[#E0E0E0] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft">
                         {slots.map(s => <option key={s} value={s}>Slot {s}</option>)}
                       </select>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[0.65rem] font-bold text-slate-500 uppercase ml-1">Subject</label>
-                      <input type="text" value={entry.subject} onChange={(e) => handleTimetableChange(index, 'subject', e.target.value)} placeholder="e.g., Data Structures" className="border border-slate-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500" required />
+                      <label className="text-[0.65rem] font-bold text-[#666666] uppercase ml-1">Subject</label>
+                      <input type="text" value={entry.subject} onChange={(e) => handleTimetableChange(index, 'subject', e.target.value)} placeholder="e.g., Data Structures" className="border border-[#E0E0E0] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] placeholder:text-[#999999] outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft" required />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[0.65rem] font-bold text-slate-500 uppercase ml-1">Class/Section</label>
-                      <input type="text" value={entry.class} onChange={(e) => handleTimetableChange(index, 'class', e.target.value)} placeholder="e.g., CS-A" className="border border-slate-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-500" required />
+                      <label className="text-[0.65rem] font-bold text-[#666666] uppercase ml-1">Class/Section</label>
+                      <input type="text" value={entry.class} onChange={(e) => handleTimetableChange(index, 'class', e.target.value)} placeholder="e.g., CS-A" className="border border-[#E0E0E0] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] placeholder:text-[#999999] outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft" required />
                     </div>
                     <div className="flex flex-col gap-1 md:mt-4">
-                      <button type="button" onClick={() => removeTimetableEntry(index)} className="p-2 text-rose-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors" title="Remove slot">
+                      <button type="button" onClick={() => removeTimetableEntry(index)} className="p-2 text-[#CD5C5C] hover:text-[#A65318] hover:bg-[#FFF4F0] rounded-lg transition-colors" title="Remove slot">
                         <Trash2 size={18} />
                       </button>
                     </div>
                   </div>
                 ))}
-                
+
                 {timetableEntries.length === 0 && (
-                  <div className="text-center py-8 bg-slate-50 rounded-xl border border-dashed border-slate-300 text-slate-500 text-sm">
+                  <div className="text-center py-8 bg-white rounded-xl border border-dashed border-[#E0E0E0] text-[#999999] text-sm">
                     No classes added. This faculty will have a completely free timetable.
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex justify-end">
-              <button type="submit" disabled={isSubmitting} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-emerald-600/30 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-70">
+            <div className="pt-4 border-t border-[#E0E0E0] flex justify-end">
+              <button type="submit" disabled={isSubmitting} className="bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] hover:from-[#0A3A7A] hover:to-[#1A5FA0] text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-[#0A4D9C]/30 transition-all flex items-center gap-2 active:scale-95 disabled:opacity-70">
                 {isSubmitting ? <Loader className="animate-spin" size={18} /> : <Save size={18} />}
                 {isSubmitting ? 'Creating Profile...' : 'Save Account & Timetable'}
               </button>
@@ -234,11 +234,11 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
           </form>
         ) : (
           <div className="flex flex-col gap-6 animate-[slideIn_0.2s_ease-out]">
-            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#E0E0E0] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-soft">
               <div className="w-full sm:w-1/2">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1.5 block ml-1">Select Faculty to Edit</label>
-                <select 
-                  className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 outline-none bg-white shadow-sm font-semibold"
+                <label className="text-xs font-bold text-[#0A4D9C] uppercase tracking-widest mb-1.5 block ml-1">Select Faculty to Edit</label>
+                <select
+                  className="w-full border border-[#E0E0E0] rounded-xl px-4 py-3 text-sm text-[#1A1A1A] focus:ring-2 focus:ring-[#0A4D9C]/30 outline-none bg-white shadow-soft font-semibold"
                   value={selectedUserId}
                   onChange={(e) => setSelectedUserId(e.target.value)}
                 >
@@ -250,9 +250,9 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
               </div>
 
               {selectedUserId && (
-                <button 
+                <button
                   onClick={handleDeleteUser}
-                  className="w-full sm:w-auto mt-auto bg-white border-2 border-rose-200 text-rose-600 hover:bg-rose-50 hover:border-rose-300 font-bold py-2.5 px-5 rounded-xl transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto mt-auto bg-white border-2 border-[#CD5C5C] text-[#CD5C5C] hover:bg-[#FFF4F0] hover:border-[#A65318] font-bold py-2.5 px-5 rounded-xl transition-all flex items-center justify-center gap-2"
                 >
                   <AlertOctagon size={18} /> Delete Account Permanently
                 </button>
@@ -262,54 +262,54 @@ export const AdminPortal = ({ addToast, allUsers, timetable, refreshData }) => {
             {selectedUserId && (
               <div className="flex flex-col gap-6 mt-4">
                 <div>
-                   <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-slate-100 pb-2">
+                   <h3 className="text-sm font-bold uppercase tracking-widest text-[#0A4D9C] mb-4 border-b border-[#E0E0E0] pb-2">
                     Current Timetable ({selectedUserTimetable.length} Slots)
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {selectedUserTimetable.map(slot => (
-                      <div key={slot._id} className="bg-white border border-slate-200 p-4 rounded-xl shadow-sm flex flex-col justify-between hover:border-emerald-200 transition-colors">
+                      <div key={slot._id} className="bg-white border border-[#E0E0E0] p-4 rounded-xl shadow-soft flex flex-col justify-between hover:border-[#0A4D9C]/30 transition-colors">
                          <div className="flex justify-between items-start mb-2">
-                           <span className="bg-slate-100 text-slate-700 text-[0.65rem] font-bold px-2 py-0.5 rounded uppercase tracking-wider">{slot.day} • S{slot.slot}</span>
-                           <button onClick={() => handleDeleteSlot(slot._id)} className="text-slate-300 hover:text-rose-500 transition-colors"><Trash2 size={16}/></button>
+                           <span className="bg-[#F4F7FB] text-[#0A4D9C] text-[0.65rem] font-bold px-2 py-0.5 rounded uppercase tracking-wider">{slot.day} • S{slot.slot}</span>
+                           <button onClick={() => handleDeleteSlot(slot._id)} className="text-[#E0E0E0] hover:text-[#CD5C5C] transition-colors"><Trash2 size={16}/></button>
                          </div>
                          <div>
-                            <div className="font-bold text-sm text-slate-800 leading-tight">{slot.subject}</div>
-                            <div className="text-xs font-semibold text-emerald-600 mt-1">{slot.class}</div>
+                            <div className="font-bold text-sm text-[#1A1A1A] leading-tight">{slot.subject}</div>
+                            <div className="text-xs font-semibold text-[#0A4D9C] mt-1">{slot.class}</div>
                          </div>
                       </div>
                     ))}
                     {selectedUserTimetable.length === 0 && (
-                      <p className="text-slate-400 text-sm italic col-span-full">No active timetable slots for this user.</p>
+                      <p className="text-[#999999] text-sm italic col-span-full">No active timetable slots for this user.</p>
                     )}
                   </div>
                 </div>
 
-                <div className="bg-emerald-50 border border-emerald-100 p-5 rounded-2xl mt-2">
-                  <h3 className="text-sm font-bold text-emerald-800 mb-3 flex items-center gap-2">
+                <div className="bg-[#F4F7FB] border border-[#D0E2F7] p-5 rounded-2xl mt-2">
+                  <h3 className="text-sm font-bold text-[#0A4D9C] mb-3 flex items-center gap-2">
                     <Plus size={16} /> Append New Class Slot
                   </h3>
                   <form onSubmit={handleAddSingleSlot} className="flex flex-wrap items-end gap-3">
                     <div className="flex flex-col gap-1 flex-1 min-w-[100px]">
-                      <label className="text-[0.65rem] font-bold text-emerald-700 uppercase">Day</label>
-                      <select value={newSlot.day} onChange={(e)=>setNewSlot({...newSlot, day: e.target.value})} className="border border-emerald-200 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500">
+                      <label className="text-[0.65rem] font-bold text-[#0A4D9C] uppercase">Day</label>
+                      <select value={newSlot.day} onChange={(e)=>setNewSlot({...newSlot, day: e.target.value})} className="border border-[#D0E2F7] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft">
                         {days.map(d => <option key={d} value={d}>{d}</option>)}
                       </select>
                     </div>
                     <div className="flex flex-col gap-1 flex-1 min-w-[90px]">
-                      <label className="text-[0.65rem] font-bold text-emerald-700 uppercase">Slot</label>
-                      <select value={newSlot.slot} onChange={(e)=>setNewSlot({...newSlot, slot: Number(e.target.value)})} className="border border-emerald-200 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500">
+                      <label className="text-[0.65rem] font-bold text-[#0A4D9C] uppercase">Slot</label>
+                      <select value={newSlot.slot} onChange={(e)=>setNewSlot({...newSlot, slot: Number(e.target.value)})} className="border border-[#D0E2F7] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft">
                         {slots.map(s => <option key={s} value={s}>Slot {s}</option>)}
                       </select>
                     </div>
                     <div className="flex flex-col gap-1 flex-[2] min-w-[150px]">
-                      <label className="text-[0.65rem] font-bold text-emerald-700 uppercase">Subject</label>
-                      <input type="text" value={newSlot.subject} onChange={(e)=>setNewSlot({...newSlot, subject: e.target.value})} placeholder="Subject" className="border border-emerald-200 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500" required />
+                      <label className="text-[0.65rem] font-bold text-[#0A4D9C] uppercase">Subject</label>
+                      <input type="text" value={newSlot.subject} onChange={(e)=>setNewSlot({...newSlot, subject: e.target.value})} placeholder="Subject" className="border border-[#D0E2F7] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] placeholder:text-[#999999] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft" required />
                     </div>
                     <div className="flex flex-col gap-1 flex-[1.5] min-w-[100px]">
-                      <label className="text-[0.65rem] font-bold text-emerald-700 uppercase">Class</label>
-                      <input type="text" value={newSlot.class} onChange={(e)=>setNewSlot({...newSlot, class: e.target.value})} placeholder="Class" className="border border-emerald-200 rounded-lg px-3 py-2 text-sm bg-white outline-none focus:ring-2 focus:ring-emerald-500" required />
+                      <label className="text-[0.65rem] font-bold text-[#0A4D9C] uppercase">Class</label>
+                      <input type="text" value={newSlot.class} onChange={(e)=>setNewSlot({...newSlot, class: e.target.value})} placeholder="Class" className="border border-[#D0E2F7] rounded-lg px-3 py-2 text-sm text-[#1A1A1A] placeholder:text-[#999999] bg-white outline-none focus:ring-2 focus:ring-[#0A4D9C]/30 shadow-soft" required />
                     </div>
-                    <button type="submit" disabled={isSubmitting} className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-5 rounded-lg shadow-md transition-all h-[38px] disabled:opacity-50">
+                    <button type="submit" disabled={isSubmitting} className="bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] hover:from-[#0A3A7A] hover:to-[#1A5FA0] text-white font-bold py-2 px-5 rounded-lg shadow-md transition-all h-[38px] disabled:opacity-50">
                       Add
                     </button>
                   </form>
