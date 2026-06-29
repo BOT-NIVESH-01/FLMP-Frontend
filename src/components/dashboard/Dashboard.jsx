@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import {
@@ -7,9 +7,8 @@ import {
   Edit, AlertOctagon, X, ChevronRight, Grid, FileText, Menu, Moon, Sun,
   Search, Building2, MapPin, Sparkles
 } from 'lucide-react';
+import { API_URL } from '../../config';
 import { useTheme } from '../../context/ThemeContext';
-
-const API_URL = 'http://localhost:5000/api';
 
 // ============================================================================
 // UTILITIES
@@ -1072,10 +1071,61 @@ const FacultyAccountManager = ({ isDark, allUsers, addToast, refreshData }) => {
     [allUsers]
   );
 
+  const [newAccount, setNewAccount] = useState({
+    name: '',
+    email: '',
+    department: 'Computer Science',
+    role: 'Faculty',
+    password: ''
+  });
+
   const [selectedFacultyId, setSelectedFacultyId] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNewAccountChange = (field, value) => {
+    setNewAccount(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleCreateAccount = async (e) => {
+    e.preventDefault();
+
+    if (!newAccount.name.trim() || !newAccount.email.trim() || !newAccount.department.trim() || !newAccount.password.trim()) {
+      addToast('Please fill all fields including password.', 'error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(
+        `${API_URL}/data/admin/users/deo-create`,
+        {
+          name: newAccount.name.trim(),
+          email: newAccount.email.trim(),
+          department: newAccount.department.trim(),
+          role: newAccount.role,
+          password: newAccount.password.trim()
+        },
+        { headers: { 'x-auth-token': token } }
+      );
+
+      addToast('New account created successfully!', 'success');
+      setNewAccount({
+        name: '',
+        email: '',
+        department: 'Computer Science',
+        role: 'Faculty',
+        password: ''
+      });
+      refreshData(false);
+    } catch (err) {
+      addToast(err.response?.data?.msg || 'Failed to create account.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleFacultySelect = (facultyId) => {
     setSelectedFacultyId(facultyId);
@@ -1123,66 +1173,151 @@ const FacultyAccountManager = ({ isDark, allUsers, addToast, refreshData }) => {
   };
 
   return (
-    <div className="glass-card shadow-soft border border-[#E0E0E0] rounded-2xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC]">
-      <div className="p-6 border-b border-[#E0E0E0] bg-gradient-to-r from-white to-[#F8FAFC]">
-        <h3 className="m-0 font-bold text-[#1A1A1A] text-xl flex items-center gap-3">
-          <div className="bg-[#0A4D9C]/10 p-2 rounded-lg"><Edit size={22} className="text-[#0A4D9C]" /></div>
-          Update Faculty Details
-        </h3>
-        <p className="text-sm text-[#666666] mt-2">Select a faculty member and update email or password.</p>
+    <div className="flex flex-col gap-6">
+      <div className="glass-card shadow-soft border border-[#E0E0E0] rounded-2xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC]">
+        <div className="p-6 border-b border-[#E0E0E0] bg-gradient-to-r from-white to-[#F8FAFC]">
+          <h3 className="m-0 font-bold text-[#1A1A1A] text-xl flex items-center gap-3">
+            <div className="bg-[#228B22]/10 p-2 rounded-lg"><UserPlus size={22} className="text-[#228B22]" /></div>
+            Create New Account
+          </h3>
+          <p className="text-sm text-[#666666] mt-2">Directly create new Faculty or HOD accounts with immediate activation.</p>
+        </div>
+
+        <form onSubmit={handleCreateAccount} className="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Full Name</label>
+            <input
+              type="text"
+              value={newAccount.name}
+              onChange={(e) => handleNewAccountChange('name', e.target.value)}
+              placeholder="e.g., Dr. Jane Doe"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#228B22]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Email</label>
+            <input
+              type="email"
+              value={newAccount.email}
+              onChange={(e) => handleNewAccountChange('email', e.target.value)}
+              placeholder="faculty@vvit.edu"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#228B22]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Password</label>
+            <input
+              type="text"
+              value={newAccount.password}
+              onChange={(e) => handleNewAccountChange('password', e.target.value)}
+              placeholder="Initial password"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#228B22]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Department</label>
+            <input
+              type="text"
+              value={newAccount.department}
+              onChange={(e) => handleNewAccountChange('department', e.target.value)}
+              placeholder="Computer Science"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#228B22]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Role</label>
+            <select
+              value={newAccount.role}
+              onChange={(e) => handleNewAccountChange('role', e.target.value)}
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#228B22]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100' : 'border-[#E0E0E0] bg-white text-[#1A1A1A]'}`}
+            >
+              <option value="Faculty">Faculty</option>
+              <option value="HOD">Head of Department (HOD)</option>
+            </select>
+          </div>
+
+          <div className="md:col-span-2 flex justify-end">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="px-6 py-2.5 bg-gradient-to-r from-[#228B22] to-[#1a6b1a] text-white rounded-xl font-bold flex items-center gap-2 hover:from-[#1a6b1a] hover:to-[#155815] disabled:opacity-60"
+            >
+              {isSubmitting ? <Loader size={16} className="animate-spin" /> : <Save size={16} />}
+              {isSubmitting ? 'Creating Account...' : 'Create Account'}
+            </button>
+          </div>
+        </form>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div className="flex flex-col gap-1.5 md:col-span-2">
-          <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Faculty</label>
-          <select
-            value={selectedFacultyId}
-            onChange={(e) => handleFacultySelect(e.target.value)}
-            className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100' : 'border-[#E0E0E0] bg-white text-[#1A1A1A]'}`}
-            required
-          >
-            <option value="">Select Faculty</option>
-            {facultyUsers.map((faculty) => (
-              <option key={getUserId(faculty)} value={getUserId(faculty)}>
-                {faculty.name} ({faculty.department})
-              </option>
-            ))}
-          </select>
+      <div className="glass-card shadow-soft border border-[#E0E0E0] rounded-2xl overflow-hidden bg-gradient-to-br from-white to-[#F8FAFC]">
+        <div className="p-6 border-b border-[#E0E0E0] bg-gradient-to-r from-white to-[#F8FAFC]">
+          <h3 className="m-0 font-bold text-[#1A1A1A] text-xl flex items-center gap-3">
+            <div className="bg-[#0A4D9C]/10 p-2 rounded-lg"><Edit size={22} className="text-[#0A4D9C]" /></div>
+            Update Faculty Details
+          </h3>
+          <p className="text-sm text-[#666666] mt-2">Select a faculty member and update email or password.</p>
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="faculty@vvit.edu"
-            className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="flex flex-col gap-1.5 md:col-span-2">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Faculty</label>
+            <select
+              value={selectedFacultyId}
+              onChange={(e) => handleFacultySelect(e.target.value)}
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100' : 'border-[#E0E0E0] bg-white text-[#1A1A1A]'}`}
+              required
+            >
+              <option value="">Select Faculty</option>
+              {facultyUsers.map((faculty) => (
+                <option key={getUserId(faculty)} value={getUserId(faculty)}>
+                  {faculty.name} ({faculty.department})
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="flex flex-col gap-1.5">
-          <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>New Password</label>
-          <input
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Leave blank to keep current password"
-            className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
-          />
-        </div>
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="faculty@vvit.edu"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+            />
+          </div>
 
-        <div className="md:col-span-2 flex justify-end">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="px-6 py-2.5 bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] text-white rounded-xl font-bold flex items-center gap-2 hover:from-[#0A3A7A] hover:to-[#1A5FA0] disabled:opacity-60"
-          >
-            {isSubmitting ? <Loader size={16} className="animate-spin" /> : <Save size={16} />}
-            {isSubmitting ? 'Updating...' : 'Update Details'}
-          </button>
-        </div>
-      </form>
+          <div className="flex flex-col gap-1.5">
+            <label className={`text-sm font-semibold pl-1 ${isDark ? 'text-[#1A1A1A]' : 'text-[#666666]'}`}>New Password</label>
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Leave blank to keep current password"
+              className={`border rounded-xl px-4 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[#0A4D9C]/30 ${isDark ? 'border-slate-600/50 bg-slate-900/50 text-slate-100 placeholder-slate-500' : 'border-[#E0E0E0] bg-white text-[#1A1A1A] placeholder-[#666666]'}`}
+            />
+          </div>
+
+          <div className="md:col-span-2 flex justify-end">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="px-6 py-2.5 bg-gradient-to-r from-[#0A4D9C] to-[#1E73BE] text-white rounded-xl font-bold flex items-center gap-2 hover:from-[#0A3A7A] hover:to-[#1A5FA0] disabled:opacity-60"
+            >
+              {isSubmitting ? <Loader size={16} className="animate-spin" /> : <Save size={16} />}
+              {isSubmitting ? 'Updating...' : 'Update Details'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

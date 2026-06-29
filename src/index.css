@@ -28,6 +28,18 @@
     scrollbar-color: #0A4D9C #F8FAFC;
 }
 
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']),
+a[href],
+summary,
+select,
+input[type='button']:not(:disabled),
+input[type='submit']:not(:disabled),
+input[type='reset']:not(:disabled),
+.cursor-pointer {
+    cursor: pointer;
+}
+
 html {
     font-family: 'Inter', sans-serif;
 }
@@ -43,7 +55,12 @@ body {
     letter-spacing: -0.3px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     color: var(--text-primary);
@@ -51,10 +68,25 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.5px;
 }
 
-h1 { font-size: 2.75rem; font-weight: 800; }
-h2 { font-size: 2.125rem; font-weight: 700; }
-h3 { font-size: 1.5rem; font-weight: 700; }
-h4 { font-size: 1.25rem; font-weight: 600; }
+h1 {
+    font-size: 2.75rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 2.125rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
 
 #root {
     min-height: 100vh;
@@ -76,8 +108,13 @@ h4 { font-size: 1.25rem; font-weight: 600; }
 }
 
 /* Premium Shadows */
-.shadow-soft { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-soft {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg);
+}
 
 /* Premium Buttons */
 .btn-gradient-primary {
@@ -217,7 +254,7 @@ h4 { font-size: 1.25rem; font-weight: 600; }
     right: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
     z-index: 0;
 }
 
@@ -232,6 +269,7 @@ h4 { font-size: 1.25rem; font-weight: 600; }
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -239,8 +277,13 @@ h4 { font-size: 1.25rem; font-weight: 600; }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Utility Classes */

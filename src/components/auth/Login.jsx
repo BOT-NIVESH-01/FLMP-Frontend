@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { BookOpen, Loader, Lock, Mail, Sparkles, AlertCircle, ShieldCheck } from 'lucide-react';
@@ -33,6 +33,8 @@ export const Login = ({ onLogin, addToast }) => {
       setIsLoggingIn(false);
     }
   };
+
+
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden p-4 font-sans" style={loginBackgroundStyle}>
@@ -134,6 +136,8 @@ export const Login = ({ onLogin, addToast }) => {
                 />
               </div>
 
+
+
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -169,6 +173,8 @@ export const Login = ({ onLogin, addToast }) => {
           <div className="pointer-events-none absolute -left-8 top-1/2 h-24 w-24 rounded-full bg-[#FFC107]/10 blur-2xl" />
         </div>
       </motion.div>
+
+
     </div>
   );
 };
