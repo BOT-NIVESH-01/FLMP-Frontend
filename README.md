@@ -1,21 +1,33 @@
-<<<<<<< HEAD
-# FLMP-Frontend
-Smart Faculty Leave &amp; Substitution Management System(Front-end)
-=======
-# React + Vite
+# FLMP Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Smart Faculty Leave and Substitution Management System (frontend).
 
-Currently, two official plugins are available:
+## Local setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install dependencies:
 
-## React Compiler
+```bash
+npm install
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Create a local env file from example and set API URL:
 
-## Expanding the ESLint configuration
+```bash
+cp .env.example .env
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> 8a28375 (initial commit)
+3. Run the dev server:
+
+```bash
+npm run dev
+```
+
+## Deploy to Vercel
+
+1. Import this repository in Vercel.
+2. Set the project Root Directory to `flmp`.
+3. Add environment variable `VITE_API_URL` with value:
+	`https://<your-backend-service>.onrender.com/api`
+4. Deploy.
+
+`vercel.json` already includes SPA rewrite support for client-side routes.
